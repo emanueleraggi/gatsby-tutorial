@@ -1,0 +1,12 @@
+.page {
+  background: green;
+}
+
+.page h1 {
+  color: blue;
+}
+
+/* generic text class */
+.text {
+  text-transform: capitalize;
+}
