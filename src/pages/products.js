@@ -1,21 +1,57 @@
-import React, { Component } from 'react'
+import React from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import styles from "../components/products.module.css"
-console.log(styles);
+import Image from "gatsby-image"
+import { Link } from "gatsby" 
 
-export default class products extends Component {
-    render() {
-        return (
-            <Layout>
-                <div className={styles.page}>
-                    <h1>this is our product page</h1>
-                    <p className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                </div>
-            </Layout>
-        )
-    }
+const ComponentName = ({ data }) => {
+  // I am going to destructure in the function body
+  const {
+    allContentfulProduct: { nodes: products },
+  } = data
+
+  console.log(products);
+
+
+
+  return (
+      <Layout>
+        <section className={styles.page}>
+          {/* now I need to access my product in the JSX */}
+          {/* witht he map function I am looping through the array */}
+          {products.map((product) => {
+            console.log(product)
+            return <article key={product.id}>
+              <Image fluid={product.image.fluid} alt={product.title}/>
+              <h3>{product.title}<span>${product.price}</span></h3>
+              <Link to={`/products/${product.slug}`}>More Details</Link>
+            </article>
+          })}
+        </section>
+      </Layout>
+  ) 
 }
+
+export const query = graphql`
+  {
+    allContentfulProduct {
+      nodes {
+        id
+        price
+        title
+        slug
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+        info {
+          info
+        }
+      }
+    }
+  }
+`
+
+export default ComponentName
