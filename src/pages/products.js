@@ -21,7 +21,7 @@ const ComponentName = ({ data }) => {
           {/* now I need to access my product in the JSX */}
           {/* witht he map function I am looping through the array */}
           {products.map((product) => {
-            console.log(product)
+            //console.log(product)
             return <article key={product.id}>
               <Image fluid={product.image.fluid} alt={product.title}/>
               <h3>{product.title}<span>${product.price}</span></h3>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from "gatsby"
+// import img from "../images/image_1.jpeg"
 import img from "../images/image_1.jpeg"
 import Image from "gatsby-image"
 
@@ -32,7 +33,7 @@ const getImage = graphql`
 
 const Images = () => {
     const data = useStaticQuery(getImage);
-    console.log(data);
+    // console.log(data);
 
     return (
         <section className="images">
@@ -50,7 +51,7 @@ const Images = () => {
                 <div className="small">
                     <Image fluid={data.fluid.childImageSharp.fluid}/>
                 </div>
-                <Images fluid={data.example.childImageSharp.fluid} />
+                <Image fluid={data.example.childImageSharp.fluid} />
             </article>
         </section>
     )
